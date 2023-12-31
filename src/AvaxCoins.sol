@@ -4,14 +4,27 @@ pragma solidity 0.8.23;
 import {ERC721} from "solmate/tokens/ERC721.sol";
 import {Owned} from "solmate/auth/Owned.sol";
 import "solmate/utils/LibString.sol";
+import "@openzeppelin/contracts/token/common/ERC2981.sol";
 
-contract AvaxCoins is ERC721, Owned {
+/*
+     _                   ____      _           _   _ _____ _____
+    / \__   ____ ___  __/ ___|___ (_)_ __  ___| \ | |  ___|_   _|
+   / _ \ \ / / _` \ \/ / |   / _ \| | '_ \/ __|  \| | |_    | |
+  / ___ \ V / (_| |>  <| |__| (_) | | | | \__ \ |\  |  _|   | |
+ /_/   \_\_/ \__,_/_/\_\\____\___/|_|_| |_|___/_| \_|_|     |_|
+*/
+
+contract AvaxCoins is ERC721, Owned, ERC2981 {
     using LibString for uint256;
 
     uint256 public constant MAX_SUPPLY = 2800;
+    uint96 public royaltyFeeNumerator = 500; // 5% royalty
+    address public royaltyAddress = 0x0e4fcEC26c9f85c3D714370c98f43C4E02Fc35Ae;
     string public baseURI = "ipfs://QmZ4WUjRAkMeFmB5oerue6ceK79g26YGrcfTvWt3NKKzJf/";
 
-    constructor() ERC721("AvaxCoins", "AVAXCOINS") Owned(msg.sender) {}
+    constructor() ERC721("AvaxCoins", "AVAXCOINS") Owned(msg.sender) {
+        _setDefaultRoyalty(royaltyAddress, royaltyFeeNumerator);
+    }
 
     function AirDrop(address[] calldata to, uint256[][] calldata ids) external onlyOwner {
         require(to.length == ids.length, "MISMATCHED_ARRAY_LENGTHS");
@@ -60,7 +73,17 @@ contract AvaxCoins is ERC721, Owned {
         require(payable(msg.sender).send(address(this).balance));
     }
 
-    function supportsInterface(bytes4 interfaceId) public view override returns (bool) {
+    function setTokenRoyalties(uint96 _royalties) external onlyOwner {
+        royaltyFeeNumerator = _royalties;
+        _setDefaultRoyalty(royaltyAddress, royaltyFeeNumerator);
+    }
+
+    function setRoyaltyPayoutAddress(address _payoutAddress) external onlyOwner {
+        royaltyAddress = _payoutAddress;
+        _setDefaultRoyalty(royaltyAddress, royaltyFeeNumerator);
+    }
+
+    function supportsInterface(bytes4 interfaceId) public view override(ERC721, ERC2981) returns (bool) {
         return super.supportsInterface(interfaceId);
     }
 }

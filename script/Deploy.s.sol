@@ -11,7 +11,7 @@ contract Deploy is Script {
 
     function run() public {
         vm.startBroadcast(deployerPrivateKey);
-        AvaxCoins avaxcoins = new AvaxCoins();
+        new AvaxCoins();
         vm.stopBroadcast();
     }
 }
