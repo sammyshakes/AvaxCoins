@@ -1,66 +1,32 @@
-## Foundry
+# Avax Coins
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+Avax Coins is a unique and innovative NFT (Non-Fungible Token) project built on the Ethereum blockchain. This project is written in Solidity and uses the Foundry toolkit for Ethereum application development.
 
-Foundry consists of:
+## Project Structure
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+This project is organized as follows:
 
-## Documentation
+- `.github/`: Contains GitHub workflow configurations.
+- `broadcast/`: Contains Solidity contracts for Airdrop and Deploy.
+- `lib/`: Contains the Forge standard library and Solmate library.
+- `script/`: Contains scripts for Airdrop and Deploy.
+- `src/`: Contains the AvaxCoins Solidity contracts.
+- `test/`: Contains tests for the AvaxCoins contracts.
 
-https://book.getfoundry.sh/
+## AvaxCoins Contract
 
-## Usage
+The main contract of this project is [`AvaxCoins.sol`](src/AvaxCoins.sol). It includes the `AirDrop` function for distributing tokens to multiple addresses and the `tokenURI` function for getting the URI of a specific token.
 
-### Build
+## Building and Testing
+
+To build the project, run:
 
 ```shell
 $ forge build
 ```
 
-### Test
+To run tests, run:
 
 ```shell
 $ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
 ```
