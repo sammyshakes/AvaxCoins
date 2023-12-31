@@ -1,6 +1,6 @@
 # Avax Coins
 
-Avax Coins is a unique and innovative NFT (Non-Fungible Token) project built on the Ethereum blockchain. This project is written in Solidity and uses the Foundry toolkit for Ethereum application development.
+Avax Coins is a unique and innovative NFT (Non-Fungible Token) project built on the Avalanche blockchain. This project is written in Solidity and uses the Foundry toolkit for Solidity application development.
 
 ## Project Structure
 
