@@ -59,7 +59,7 @@ contract AvaxCoins is ERC721, Owned, ERC2981 {
     }
 
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
-        require(tokenId < MAX_SUPPLY, "AvaxCoins: Token does not exist");
+        require(tokenId <= MAX_SUPPLY, "AvaxCoins: Token does not exist");
 
         string memory baseUri = _baseURI();
         return bytes(baseUri).length > 0 ? string(abi.encodePacked(baseUri, tokenId.toString())) : "";
