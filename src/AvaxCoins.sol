@@ -26,22 +26,29 @@ contract AvaxCoins is ERC721, Owned, ERC2981 {
         _setDefaultRoyalty(royaltyAddress, royaltyFeeNumerator);
     }
 
-    function AirDrop(address[] calldata to, uint256[][] calldata ids) external onlyOwner {
-        require(to.length == ids.length, "MISMATCHED_ARRAY_LENGTHS");
+    function AirDrop(address[] calldata to, uint256[] calldata flatTokenIds, uint256[] calldata lengths)
+        external
+        onlyOwner
+    {
+        require(to.length == lengths.length, "MISMATCHED_ARRAY_LENGTHS");
+
+        uint256 tokenIdIndex = 0;
 
         for (uint256 i = 0; i < to.length; i++) {
             address recipient = to[i];
             require(recipient != address(0), "INVALID_RECIPIENT");
 
-            uint256[] memory recipientTokenIds = ids[i];
+            uint256 numberOfTokens = lengths[i];
 
             // Counter overflow is incredibly unrealistic, so use unchecked
             unchecked {
-                _balanceOf[recipient] += recipientTokenIds.length;
+                _balanceOf[recipient] += numberOfTokens;
             }
 
-            for (uint256 j = 0; j < recipientTokenIds.length; j++) {
-                uint256 id = recipientTokenIds[j];
+            for (uint256 j = 0; j < numberOfTokens; j++) {
+                require(tokenIdIndex < flatTokenIds.length, "TOKEN_ID_INDEX_OUT_OF_BOUNDS");
+
+                uint256 id = flatTokenIds[tokenIdIndex++];
                 require(_ownerOf[id] == address(0), "ALREADY_MINTED");
 
                 _ownerOf[id] = recipient;
