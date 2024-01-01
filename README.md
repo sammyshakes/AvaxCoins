@@ -36,10 +36,10 @@ $ forge test
 To deploy the contracts, run:
 
 ```shell
-forge script script/Deploy.s.sol:Deploy --rpc-url fuji --broadcast --verify
+forge script script/Deploy.s.sol:Deploy --rpc-url avax --broadcast --verify --verifier-url 'https://api.routescan.io/v2/network/mainnet/evm/43114/etherscan' --etherscan-api-key "verifyContract"
 ```
 
-## Verifying Contracts
+## Verifying Contracts (in case does not verify in deployment step)
 
 To verify the contracts on Etherscan, run:
 
@@ -52,5 +52,5 @@ forge verify-contract <CONTRACT_ADDRESS> src/AvaxCoins.sol:AvaxCoins --verifier-
 To airdrop tokens, run:
 
 ```shell
-forge script script/Airdrop.s.sol:Airdrop --rpc-url fuji --broadcast -vvvv
+forge script script/Airdrop.s.sol:Airdrop --rpc-url avax --broadcast -vvvv
 ```

@@ -12,6 +12,7 @@ import "@openzeppelin/contracts/token/common/ERC2981.sol";
    / _ \ \ / / _` \ \/ / |   / _ \| | '_ \/ __|  \| | |_    | |
   / ___ \ V / (_| |>  <| |__| (_) | | | | \__ \ |\  |  _|   | |
  /_/   \_\_/ \__,_/_/\_\\____\___/|_|_| |_|___/_| \_|_|     |_|
+
 */
 
 contract AvaxCoins is ERC721, Owned, ERC2981 {

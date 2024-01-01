@@ -4,6 +4,7 @@ out = "out"
 src = "src"
 
 [rpc_endpoints]
+avax = "${AVAX_MAINNET_RPC_URL}"
 fuji = "${AVAX_FUJI_TESTNET_RPC_URL}"
 goerli = "${GOERLI_RPC_URL}"
 mainnet = "${MAINNET_RPC_URL}"
